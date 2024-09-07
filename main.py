@@ -1,17 +1,15 @@
 from tkinter import *
 from tkinter import ttk
 from mysqlConnection.mysqlConnection import Connect
+from pages.insurancePage import InsurancePage
+from pages.depositsPage import DepositsPage
 
 
 class MainScreen:
     def __init__(self):
         self.mysqlConnection = Connect()
-        self.loggedIn = False
         
-        if self.loggedIn == False:
-            self.login()
-        else:
-            pass
+        self.login()
 
     def login(self):
         def closeWindow():
@@ -27,7 +25,6 @@ class MainScreen:
             
             for i in content:
                 if uInput in i and pInput in i:
-                    self.loggedIn = True
                     loginConfirm_textvar.set("Credentials correct.\nSuccessful login.")
                     closeWindow()
                     self.homePage()
@@ -62,22 +59,21 @@ class MainScreen:
         loginPage.mainloop()
 
     def homePage(self):
+        def openInsurance():
+            insurance = InsurancePage()
+
+        def openDeposits():
+            deposits = DepositsPage()
+            
         homePage = Tk()
-        homePage.geometry("500x400")
+        homePage.geometry("600x300+0+0")
 
-        appBarFrame = ttk.Frame(homePage)
-        appBarFrame.grid(row = 0)
-
-        ttk.Label(appBarFrame, text = "Finance App").grid(row = 0, column = 0, padx = 20, pady = 20)
-
-        bodyFrame = ttk.Frame(homePage)
-        bodyFrame.grid(row = 1)
-
-        ttk.Button(bodyFrame, text = "Insurance").grid(row = 0, column = 0, padx = 20, pady = 10)
-        ttk.Button(bodyFrame, text = "Deposits").grid(row = 1, column = 0, padx = 20, pady = 10)
+        ttk.Label(homePage, text = "Finance App").grid(row = 0, column = 1)
+        choiceFrame = ttk.Frame(homePage).grid(padx = 125, pady = 50)
+        ttk.Button(choiceFrame, text = "Insurance", command = openInsurance).grid(pady = 10, row = 2, column = 1)
+        ttk.Button(choiceFrame, text = "Deposits", command = openDeposits).grid(row = 3, column = 1)
 
         homePage.mainloop()
-
 
 if __name__ == "__main__":
     mainScreen = MainScreen()
