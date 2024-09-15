@@ -1,8 +1,8 @@
 from tkinter import *
 from tkinter import ttk
-from mysqlConnection.mysqlConnection import Connect
-from pages.insurancePage import InsurancePage
-from pages.depositsPage import DepositsPage
+from mysqlFile import Connect
+from insurancePage import InsuranceClass
+from depositsPage import DepositsPage
 
 
 class MainScreen:
@@ -24,7 +24,7 @@ class MainScreen:
                 loginConfirm_textvar.set("No available records.")
             
             for i in content:
-                if uInput in i and pInput in i:
+                if uInput in i and pInput in i: 
                     loginConfirm_textvar.set("Credentials correct.\nSuccessful login.")
                     closeWindow()
                     self.homePage()
@@ -60,11 +60,11 @@ class MainScreen:
 
     def homePage(self):
         def openInsurance():
-            insurance = InsurancePage()
+            InsuranceClass()
 
         def openDeposits():
-            deposits = DepositsPage()
-            
+            DepositsPage()
+      
         homePage = Tk()
         homePage.geometry("600x300+0+0")
 
