@@ -1,5 +1,13 @@
 try {
     Set-Location -Path (Get-Location)
+    python -m venv .venv
+    if ($LASTEXITCODE -eq 0) {
+        throw "Failed to create virtual environment."
+    }
+    source .\venv\Scripts\Activate.ps1
+    if ($LASTEXITCODE -eq 0) {
+        throw "Failed to activate virtual environment."
+    }
 
     pip install -r requirements.txt
     if ($LASTEXITCODE -ne 0) {
