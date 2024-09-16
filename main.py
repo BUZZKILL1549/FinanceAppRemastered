@@ -1,8 +1,8 @@
 from tkinter import *
 from tkinter import ttk
-from sqlFile import Connect
-from insurancePage import InsuranceClass
-from depositsPage import DepositsClass
+from pages.sql.sqlFile import Connect
+from pages.insurancePage import InsuranceClass
+from pages.depositsPage import DepositsClass
 
 
 class MainScreen:

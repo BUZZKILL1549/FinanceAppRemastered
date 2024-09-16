@@ -1,5 +1,14 @@
-.venv/
+# Ignore compiled bytecode
+__pycache__/
+*.py[cod]
 
-.db
+# Ignore virtual environment
+venv/
+env/
 
-_pycache_/
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore system files
+.DS_Store
+*.log
