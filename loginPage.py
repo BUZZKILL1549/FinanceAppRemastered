@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from mysqlFile import Connect
+from sqlFile import Connect
 from mainPage import main
 
 def login() -> None:

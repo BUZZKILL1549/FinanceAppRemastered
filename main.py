@@ -1,14 +1,14 @@
 from tkinter import *
 from tkinter import ttk
-from mysqlFile import Connect
+from sqlFile import Connect
 from insurancePage import InsuranceClass
-from depositsPage import DepositsPage
+from depositsPage import DepositsClass
 
 
 class MainScreen:
     def __init__(self):
         self.mysqlConnection = Connect()
-        
+
         self.login()
 
     def login(self):
@@ -19,7 +19,7 @@ class MainScreen:
             uInput = userInput.get()
             pInput = passwordInput.get()
             
-            content = self.mysqlConnection.retrieveUsersData()
+            content = self.mysqlConnection.retrieveUserInfo()
             if content == []:
                 loginConfirm_textvar.set("No available records.")
             
@@ -63,7 +63,7 @@ class MainScreen:
             InsuranceClass()
 
         def openDeposits():
-            DepositsPage()
+            DepositsClass()
       
         homePage = Tk()
         homePage.geometry("600x300+0+0")
