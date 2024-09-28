@@ -1,41 +1,58 @@
+from sql.sqlFile import Connect
 from tkinter import *
 from tkinter import ttk
-from pages.sql.sqlFile import Connect
-from mainPage import main
 
-def login() -> None:
-    def performLogin():
-        mysqlConnection = Connect()
-        userData = mysqlConnection.retrieveUserInfo()
+from dashboard import Dashboard
 
-        uname = username.get()
-        pwd = password.get()
 
-        for users in userData:
-            if not (uname in users and pwd in users):
-                wrong.set("Incorrect username or password")
+class Login:
+    def __init__(self) -> None:
+        self.sqlConnection = Connect()
+
+        self.loginScreen = Tk()
+        self.loginScreen.title('Login')
+
+        self.appBarFrame = ttk.Frame(self.loginScreen)
+        self.appBarFrame.grid(row = 0)
+        
+        ttk.Label(self.appBarFrame, text = 'LOGIN TO CONTINUE').grid(padx = 20, pady = 20)
+
+        self.bodyFrame = ttk.Frame(self.loginScreen)
+        self.bodyFrame.grid(row = 1)
+
+        ttk.Label(self.bodyFrame, text = 'Username: ').grid(row = 0, column = 0, padx = 10, pady = 5)
+        self.userInput = ttk.Entry(self.bodyFrame)
+        self.userInput.grid(row = 0, column = 1, padx = 10)
+
+        ttk.Label(self.bodyFrame, text = 'Password: ').grid(row = 1, column = 0, padx = 10, pady = 5)
+        self.passwordInput = ttk.Entry(self.bodyFrame)
+        self.passwordInput.grid(row = 1, column = 1, padx = 10)
+
+        self.loginConfirm_textVar = StringVar()
+        ttk.Label(self.bodyFrame, text = '', textvariable = self.loginConfirm_textVar).grid(row = 2, column = 1)
+
+        ttk.Button(self.bodyFrame, text = 'Login', command = self.authenticateLogin).grid(row = 3, column = 1, pady = 20)
+
+        self.loginScreen.mainloop()
+
+    def authenticateLogin(self):
+        uInput = self.userInput.get()
+        pInput = self.passwordInput.get()
+
+        content = self.sqlConnection.retrieveUserInfo()
+        if content == []:
+            self.loginConfirm_textVar.set('No available records.')
+
+        for i in content:
+            if uInput in i and pInput in i:
+                self.loginConfirm_textVar.set('Credentials correct.\nLogin Successful.')
+                self.closeWindow()
+                Dashboard()
             else:
-                wrong.set("Correct! Successful login.")
-                login.destroy()
-                main()
+                self.loginConfirm_textVar.set('Credentials wrong.\nLogin Unsuccessful.')
 
-    login = Tk()
-    login.title('Login')
+    def closeWindow(self):
+        self.loginScreen.destroy()
 
-    ttk.Label(login, text = 'Username: ').grid(row = 0, column = 0, padx = 30, pady = 50)
-    username = ttk.Entry(login)
-    username.grid(padx = 20, row = 0, column = 1, ipadx = 80)
-
-    ttk.Label(login, text = 'Password: ').grid(row = 1, column = 0, padx = 30, pady = 50)
-    password = ttk.Entry(login, show = '*')
-    password.grid(padx = 20, row = 1, column = 1, ipadx = 80)
-
-    wrong = StringVar()
-    ttk.Label(login, text = "", textvariable=wrong).grid(row = 3, column = 1, padx = 15, pady = 30, sticky = W)
-
-    ttk.Button(login, text = 'Login', command = performLogin).grid(row = 2, column = 1, ipadx = 50)
-
-    login.mainloop()
-
-if __name__ == "__main__":
-    login()
+if __name__ == '__main__':
+    Login()
