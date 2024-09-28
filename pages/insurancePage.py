@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from pages.sql.sqlFile import Connect
+from sql.sqlFile import Connect
 import pandas as pd
 from datetime import date
 from matplotlib import pyplot as plt
