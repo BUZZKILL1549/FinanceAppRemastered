@@ -50,7 +50,13 @@ class Connect:
                                         MaturityDate				date,
                                         MaturityAmount				float
                                     )''')
-                self.cnx.execute('INSERT INTO users VALUES("Aushadh", "password")')
+                
+                self.cursor.execute("SELECT count(*) FROM USERS")
+                x = self.cursor.fetchall()
+
+                if x == [(0,)]:
+                    self.registerUserInfo()
+                
                 self.cnx.commit()
 
                 try:
@@ -68,17 +74,16 @@ class Connect:
 
     # this function is only executed once for the whole program through the powershell script
     def registerUserInfo(self) -> None: 
-        if len(sys.argv) != 4:
-            print("Usage: sqlFile.py <username> <password>")
-            sys.exit(1)
-
-        username = sys.argv[2]
-        password = sys.argv[3]
+        print("No user has been registered. Please enter your username and password.")
+        
+        username = input("Username: ")
+        password = input("Password: ")
 
         self.cursor.execute("INSERT INTO users (Uname, Pwd) VALUES (?, ?)", (username, password))
         self.cnx.commit()
 
         print("Successfully registered data.")
+        print(r"Please launch the program from FinanceAppRemastered\Pages\loginPage.py")
 
     def retrieveUserInfo(self) -> list[tuple]:
         self.cursor.execute("SELECT * FROM users")
