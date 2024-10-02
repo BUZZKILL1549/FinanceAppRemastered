@@ -17,10 +17,18 @@ This may be Installed by visiting https://www.python.org/ and downloading the la
 Please DO NOT try installing dependencies without installing Python. It will not work. This whole project relies on Python.
 
 ## Installing dependencies (after installing python)
-Run the following commands in Powershell (v5.1 or greater):
+Step 1:
+Move to the root folder of your project and open cmd (commandprompt) and run the following:
 ~~~
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\automate.ps1
+.\automate.bat
 ~~~
+This will install all needed dependencies.
+
+Step 2:
+Move to the root folder and run:
+~~~
+.\runPy.py
+~~~
+You may create a shortcut of the same or keep running it through cmd if you so wish.
 
 That's really about it. I've tried to simplify this as much as I can.
