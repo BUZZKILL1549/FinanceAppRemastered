@@ -25,7 +25,7 @@ class Login:
         self.userInput.grid(row = 0, column = 1, padx = 10)
 
         ttk.Label(self.bodyFrame, text = 'Password: ').grid(row = 1, column = 0, padx = 10, pady = 5)
-        self.passwordInput = ttk.Entry(self.bodyFrame)
+        self.passwordInput = ttk.Entry(self.bodyFrame, show = '*')
         self.passwordInput.grid(row = 1, column = 1, padx = 10)
 
         self.loginConfirm_textVar = StringVar()

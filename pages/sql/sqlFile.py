@@ -1,12 +1,9 @@
 import sqlite3
 import sys
-import os
-
+from getpass import getpass
 
 class Connect:
     def __init__(self) -> None:
-        os.chdir(r"pages\sql")
-
         self.INSURANCE_QUERY = "SELECT * FROM insurance"
         self.DEPOSITS_QUERY = "SELECT * FROM deposits"
 
@@ -70,14 +67,12 @@ class Connect:
         except sqlite3.Error as error:
             print("Failed to connect to database: {}".format(error))
         
-        os.chdir(r"..\..")
-
     # this function is only executed once for the whole program through the powershell script
-    def registerUserInfo(self) -> None: 
+    def registerUserInfo(self) -> None:
         print("No user has been registered. Please enter your username and password.")
         
         username = input("Username: ")
-        password = input("Password: ")
+        password = getpass()
 
         self.cursor.execute("INSERT INTO users (Uname, Pwd) VALUES (?, ?)", (username, password))
         self.cnx.commit()
