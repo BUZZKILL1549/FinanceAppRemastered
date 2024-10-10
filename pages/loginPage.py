@@ -8,7 +8,7 @@ from dashboard import Dashboard
 class Login:
     def __init__(self) -> None:
         self.sqlConnection = Connect()
-
+        
         self.loginScreen = Tk()
         self.loginScreen.title('Login')
 

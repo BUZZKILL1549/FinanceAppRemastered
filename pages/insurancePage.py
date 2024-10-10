@@ -270,7 +270,8 @@ class InsuranceClass:
             policyPaymentTerm = policyPaymentTerm_entry.get()
             premiumPaymentFrequency = premiumPaymentFrequency_entry.get()
             lastPremiumPaid = lastPremiumPaid_entry.get_date()
-            nextPremiumDue = nextPremiumDue_entry.get_date()
+            nextPremiumDue_date = nextPremiumDue_entry.get_date()
+            nextPremiumDue = nextPremiumDue_date.isoformat()
             maturityDate = maturityDate_entry.get_date()
             maturityAmount = float(maturityAmount_entry.get())
 

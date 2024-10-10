@@ -116,7 +116,17 @@ class Connect:
         except sqlite3.Error as error:
             print("Unexpected error occured: {}".format(error))
         
+    def checkInsuranceDueDate(self) -> list[tuple]:
+        query = '''SELECT InsuranceProvider, NextPremiumDue
+                FROM insurance
+                WHERE NextPremiumDue BETWEEN DATE("now") AND DATE("now", "+1 month")'''
+        
+        self.cursor.execute(query)
+        insuranceDueDate = self.cursor.fetchall()
 
+        return insuranceDueDate
+
+    
 if __name__ == "__main__":
     x = Connect()
     
