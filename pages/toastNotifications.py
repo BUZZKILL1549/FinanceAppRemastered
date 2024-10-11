@@ -38,8 +38,3 @@ class Notify:
             msg = f"{insuranceProvider} payment due by {nextPremiumDue}",
             duration = 5
         )
-
-
-if __name__ == "__main__":
-    x = Notify()
-    
